@@ -133,168 +133,84 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false, //لإخفاء شريط depug
-        home: new Material(
-            type: MaterialType.transparency,
-            child: new Container(
-                alignment: Alignment.bottomCenter,
-                width: double.infinity,
-                child: Container(
-                    color: Colors.white, //bacolor,
-                    child: CustomPaint(
-                        size: Size(
-                            100,
-                            (200 * 1.5)
-                                .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                        painter: RPSCustomPainter(),
-                        child: ListView(
-                          children: [
-                            BottomCircle(),
-                            //*********************************
-                            SizedBox(
-                              height: 300.0,
-                            ),
-                            //*********************************
-                            Center(
-                              child: Text(
-                                "OtoBüs",
-                                style: TextStyle(
-                                  fontSize: 60,
-                                  fontFamily: 'Pacifico',
-                                  color: Color(
-                                      0xFF07322a), // Color(0xFF05211b) //Color(0xFF02100d),
-                                ),
-                              ),
-                            ),
-                            //*********************************
-                            /*Center(
-                          child: Text(
-                            //"App saves your time and effort in booking buses",
-                            "   وفرّ وقتك و قلقك بشأن المواصلات بحجز الباص مسبقاً",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'ArefRuqaaR', //'Pacifico',
-                              color: Color(0xFF07322a), //Color(0xFF64726f),
-                            ),
-                          ),
-                        ),*/
-                            //*********************************
-                            Center(
-                              child: Builder(builder: (BuildContext mContext) {
-                                return Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Stack(
-                                    alignment: Alignment(1.0, 0.0),
-                                    children: <Widget>[
-                                      new GestureDetector(
-                                        onTap: () {
-                                          setState(() {});
-                                        },
-                                        child: new Container(
-                                          alignment: Alignment.center,
-                                          width: MediaQuery.of(mContext)
-                                                  .size
-                                                  .width /
-                                              1.7,
-                                          decoration: ShapeDecoration(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        30.0)),
-                                            gradient: LinearGradient(
-                                                colors: myGradients1,
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight),
-                                            shadows: [
-                                              BoxShadow(
-                                                color: Color(0xFF07322a)
-                                                    .withOpacity(0.5),
-                                                //Colors.grey,
-                                                spreadRadius: 3,
-                                                blurRadius: 7,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                          ),
-                                          child: Text(
-                                              "  تسجيل الدخول", //"Sign up"
-                                              style: TextStyle(
-                                                  color:
-                                                      Colors.white, //bacolor,
-                                                  fontSize: 15, //18
-                                                  fontFamily:
-                                                      'Lemonada', // 'ArefRuqaaR', //Pacifico',
-                                                  fontWeight: FontWeight.w500)),
-                                          padding: EdgeInsets.only(
-                                              top: 16, bottom: 16),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              }),
-                            ),
-                            //*********************************
-                            Center(
-                              child: Builder(builder: (BuildContext mContext) {
-                                return Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Stack(
-                                    alignment: Alignment(1.0, 0.0),
-                                    children: <Widget>[
-                                      new GestureDetector(
-                                          onTap: () {},
-                                          child: new Container(
-                                            alignment: Alignment.center,
-                                            width: MediaQuery.of(mContext)
-                                                    .size
-                                                    .width /
-                                                1.7,
-                                            decoration: ShapeDecoration(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30.0)),
-                                              gradient: LinearGradient(
-                                                  colors: myGradients2,
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight),
-                                              shadows: [
-                                                BoxShadow(
-                                                  color: Color(0xFF07322a)
-                                                      .withOpacity(0.5),
-                                                  //Colors.grey,
-                                                  spreadRadius: 3,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ],
-                                            ),
-                                            child: Text(
-                                                "إنشاء حساب", //"Log in""إنشاء حساب   "
-                                                style: TextStyle(
-                                                    color:
-                                                        Colors.white, //bacolor,
-                                                    fontSize: 15,
-                                                    fontFamily:
-                                                        'Lemonada', //'ArefRuqaaR',25 //Pacifico',18
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                            padding: EdgeInsets.only(
-                                                top: 16, bottom: 16),
-                                          )),
-                                    ],
-                                  ),
-                                );
-                              }),
-                            ),
-                          ],
-                        ))))));
+        home: Scaffold(
+            backgroundColor: ba1color,
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              actions: <Widget>[
+                new Container(),
+              ],
+              title: Center(
+                child: Text(
+                  "OtoBüs",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Pacifico',
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              backgroundColor: apcolor,
+            ),
+            body: GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 5.0,
+                children: List.generate(choices.length, (index) {
+                  return Center(
+                    child: SelectCard(choice: choices[index]),
+                  );
+                }))));
   }
+}
+
+class Choice {
+  const Choice({this.title, this.icon});
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'طوباس'),
+  const Choice(title: 'طمون'),
+  const Choice(title: 'الفارعة'),
+  const Choice(title: 'الباذان'),
+  const Choice(title: 'طلوزة'), //, icon: Icons.camera_alt
+  const Choice(title: 'النصارية'),
+  const Choice(title: 'بيتا'),
+  const Choice(title: 'عقربة'),
+  const Choice(title: 'عصيرة '),
+  const Choice(title: 'حوارة'),
+  const Choice(title: 'بيت دجن'),
+  const Choice(title: 'بيت فوريك'),
+  const Choice(title: 'سالم'),
+  const Choice(title: 'دير الحطب'),
+  const Choice(title: 'روجيب'),
+];
+
+class SelectCard extends StatelessWidget {
+  const SelectCard({Key key, this.choice}) : super(key: key);
+  final Choice choice;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    return Card(
+        color: iconBack,
+        child: Center(
+          child: //Column(
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              //children: <Widget>[
+              //Expanded(child:Icon(choice.icon, size: 50.0, color: color.white)),
+              Center(
+                  child: Text(
+            choice.title,
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: 'ArefRuqaaR',
+              color: Colors.white,
+            ),
+          )),
+          //]),
+        ));
   }
 }
