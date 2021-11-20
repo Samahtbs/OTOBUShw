@@ -1,5 +1,7 @@
+import 'package:OTOBUShw/region.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 Color apcolor = const Color(0xFF1ABC9C);
 Color apBcolor = const Color(0xFF00796B);
@@ -78,63 +80,13 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class RPSCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint_0 = new Paint()
-      ..color = Color(0xFF159a7f)
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1;
-    // paint_0.shader = ui.Gradient.linear(
-    //    Offset(0, 0), Offset(size.width, 0), myGradients1, [0.00, 1.00]);
-    Path path_0 = Path();
-    path_0.moveTo(0, 0);
-    path_0.cubicTo(
-        size.width * 0.7471875,
-        size.height * -0.0015000,
-        size.width * 0.6921875,
-        size.height * 0.0005000,
-        size.width * 0.9412500,
-        0);
-    path_0.cubicTo(
-        size.width * 0.8303125,
-        size.height * 0.3325000,
-        size.width * 0.2484375,
-        size.height * 0.0115000,
-        0,
-        size.height * 0.4860000);
-    path_0.cubicTo(size.width * -0.0006250, size.height * 0.3440000,
-        size.width * -0.0018750, size.height * 0.3720000, 0, 0);
-    path_0.close();
-    canvas.drawShadow(path_0, Color(0xFF07322a), 10, true);
-    canvas.drawPath(path_0, paint_0);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
-class BottomCircle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Transform.translate(
-        offset: Offset(50.0, 50.0),
-        child: Material(
-          color: apcolor,
-          shape: CircleBorder(),
-        ));
-  }
-}
-
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false, //لإخفاء شريط depug
         home: Scaffold(
-            backgroundColor: ba1color,
+            backgroundColor: iconBack, //ba1color,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: <Widget>[
@@ -154,8 +106,8 @@ class _MyAppState extends State<MyApp> {
             ),
             body: GridView.count(
                 crossAxisCount: 3,
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 5.0,
+                crossAxisSpacing: 0.0,
+                mainAxisSpacing: 0.0,
                 children: List.generate(choices.length, (index) {
                   return Center(
                     child: SelectCard(choice: choices[index]),
@@ -195,22 +147,29 @@ class SelectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: iconBack,
-        child: Center(
-          child: //Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              //children: <Widget>[
-              //Expanded(child:Icon(choice.icon, size: 50.0, color: color.white)),
-              Center(
-                  child: Text(
-            choice.title,
-            style: TextStyle(
-              fontSize: 30,
-              fontFamily: 'ArefRuqaaR',
-              color: Colors.white,
-            ),
-          )),
-          //]),
-        ));
+      color: iconBack,
+      child: //Center(
+          //child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          //children: <Widget>[
+          //Expanded(child:Icon(choice.icon, size: 50.0, color: color.white)),
+          RaisedButton(
+              onPressed: () {
+                //Navigator.push(context, )
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => region()),
+                );
+              },
+              child: Text(
+                choice.title,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontFamily: 'ArefRuqaaR',
+                  color: Colors.black,
+                ),
+              )),
+      //]),
+    );
   }
 }
